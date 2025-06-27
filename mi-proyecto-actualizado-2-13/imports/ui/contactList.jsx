@@ -16,15 +16,27 @@ export const ContactList = () => {
   } // Mientras los datos están cargando, se muestra el mensaje
 
   return (
-    <>
-      <h3>Lista de contactos</h3>
-      <ul>
-        {contactos.map((contacto) => ( // Se recorre el array de contactos y el map toma cada contacto, la key se coloca para que React sepa qué elemento se agregó y lo pueda identificar, luego se muestran los datos a cada contacto
-          <li key={contacto._id}> 
-            {contacto.name} - {contacto.email} 
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+    <div>
+      <div className="mt-10">
+        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+          Lista de Contactos
+        </h3>
+        <ul role="list" className="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
+          {contactos.map((person, personIdx) => (
+            <li key={personIdx} className="py-4 flex items-center justify-between space-x-3">
+              <div className="min-w-0 flex-1 flex items-center space-x-3">
+                <div className="flex-shrink-0">
+                  <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-gray-900 truncate">{person.name}</p>
+                  <p className="text-sm font-medium text-gray-500 truncate">{person.email}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
 };
