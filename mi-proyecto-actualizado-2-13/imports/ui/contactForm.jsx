@@ -1,17 +1,20 @@
 import React, {useState} from "react";
-import { ContactsCollection } from "../api/contactCollection";
-
+import { Meteor } from "meteor/meteor";
 export const ContactForm = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
     const saveContact = () => {
-        console.log({name, email, imageUrl})
-        // ContactsCollection.insert({name, email, imageUrl})
-        setName("")
-        setEmail("")
-        setImageUrl("")
+        Meteor.call("contactos.insert", {name, email, imageUrl}, (errorResponse) => {
+          if(errorResponse){
+            alert(errorResponse.error)
+          } else {
+            setName("")
+            setEmail("")
+            setImageUrl("")
+          }
+        })
    }
 
     return (

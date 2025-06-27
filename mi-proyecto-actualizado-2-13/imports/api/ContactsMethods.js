@@ -1,6 +1,10 @@
+import { Meteor } from "meteor/meteor";
 import { ContactsCollection } from "./contactCollection";
 Meteor.methods({
-    insert({name, email, imageUrl}) {
+    "contactos.insert"({name, email, imageUrl}) {
+        if(!name){
+            throw new Meteor.Error("El campo Name es obligatorio")
+        }
         return ContactsCollection.insert({name, email, imageUrl})
     }
     
